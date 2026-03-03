@@ -112,6 +112,8 @@ footer{
 <input type="number" id="rate" value="30" required>
 <label>Saving Goal (BDT)</label>
 <input type="number" id="goal">
+<label>Remittance Fee (%)</label>
+<input type="number" id="fee" value="0">
 <button onclick="calculate()">Calculate</button>
 
 <div class="result" id="output"></div>
@@ -128,26 +130,30 @@ function calculate(){
 var sar = document.getElementById("sar").value;
 var rate = document.getElementById("rate").value;
 var goal = document.getElementById("goal").value;
+var fee = document.getElementById("fee").value;
 if(sar=="" || rate==""){
-    document.getElementById("output").innerHTML="Please enter all values";
+document.getElementById("output").innerHTML="Please enter all values";
     return;
 }
-
 var bdt = sar * rate;
-var monthly = bdt;   
-var yearly = bdt * 12;
+var finalBdt = bdt - (bdt * fee / 100);
+var monthly = finalBdt;
+var yearly = finalBdt * 12;
 var monthsNeeded = "";
+
 if(goal != ""){
     monthsNeeded = Math.ceil(goal / monthly);
-}    
-bdt = Number(bdt).toLocaleString();
-yearly = Number(yearly).toLocaleString();
-monthly = Number(monthly).toLocaleString();
+}
+
+var formattedBdt = finalBdt.toLocaleString();
+var formattedMonthly = monthly.toLocaleString();
+var formattedYearly = yearly.toLocaleString();
+
 document.getElementById("output").innerHTML =
-"SAR "+sar+" = "+bdt+" BDT <br><br>" +
-"Monthly Savings = "+monthly+" BDT <br><br>" +
-"1 Year Savings = "+yearly+" BDT <br><br>" +
-(goal != "" ? "You need "+monthsNeeded+" months to reach your goal." : "");
+"SAR " + sar + " = " + formattedBdt + " BDT <br><br>" +
+"Monthly Savings = " + formattedMonthly + " BDT <br><br>" +
+"1 Year Savings = " + formattedYearly + " BDT <br><br>" +
+(goal != "" ? "You need " + monthsNeeded + " months to reach your goal." : "");
 </script>
 
 </body>
