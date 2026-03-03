@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SAR to BDT Calculator</title>
+    <style>
+        body { font-family: Arial; text-align:center; margin-top:50px; }
+        input { padding:10px; width:200px; }
+        button { padding:10px 20px; margin-top:10px; }
+        h1 { color:green; }
+    </style>
+</head>
+<body>
+
+<h1>SAR to BDT Calculator</h1>
+
+<input type="number" id="sar" placeholder="Enter SAR Amount">
+<br><br>
+<button onclick="convert()">Convert</button>
+
+<h2 id="result"></h2>
+
+<script>
+function convert() {
+    var sar = document.getElementById("sar").value;
+    var rate = 30;
+    var bdt = sar * rate;
+    document.getElementById("result").innerHTML =
+        sar + " SAR = " + bdt + " BDT";
+}
+</script>
+
+</body>
+</html>
