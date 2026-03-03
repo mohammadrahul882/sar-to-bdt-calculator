@@ -20,12 +20,12 @@ body{
     margin:0;
     background:#f2f2f2;
 }
-
 header{
-    background:#0a7c2f;
-    color:white;
-    padding:20px;
-    text-align:center;
+   background: linear-gradient(135deg, #0a7c2f, #065f23);
+   color:white;
+   padding:25px;
+   text-align:center;
+}
 }
 
 .container{
@@ -63,9 +63,14 @@ button:hover{
 }
 
 .result{
-    margin-top:20px;
+    margin-top:25px;
+    padding:20px;
     font-weight:bold;
     text-align:center;
+    background:#f0f8ff;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-size:16px;
 }
 footer{
     text-align:center;
@@ -73,14 +78,29 @@ footer{
     font-size:14px;
     color:#777;
 }
+.dark{
+    background:#121212;
+    color:white;
+}
+
+.dark .container{
+    background:#1e1e1e;
+}
+
+.dark input{
+    background:#2c2c2c;
+    color:white;
+    border:1px solid #555;
+}    
 </style>
 </head>
 
 <body>
 
 <header>
-<h2>Saudi Salary Planner</h2>
+<h2>🇸🇦 Saudi Salary Planner 🇧🇩</h2>
 <p>SAR to BDT + Savings Goal Tool</p>
+<button onclick="toggleDarkMode()" style="margin-top:10px;">🌙 Dark Mode</button>    
 </header>
 
 <div class="container">
@@ -90,7 +110,8 @@ footer{
 
 <label>Exchange Rate (1 SAR = ? BDT)</label>
 <input type="number" id="rate" value="30" required>
-
+<label>Saving Goal (BDT)</label>
+<input type="number" id="goal">
 <button onclick="calculate()">Calculate</button>
 
 <div class="result" id="output"></div>
@@ -106,19 +127,27 @@ function calculate(){
 
 var sar = document.getElementById("sar").value;
 var rate = document.getElementById("rate").value;
-
+var goal = document.getElementById("goal").value;
 if(sar=="" || rate==""){
     document.getElementById("output").innerHTML="Please enter all values";
     return;
 }
 
 var bdt = sar * rate;
+var monthly = bdt;   
 var yearly = bdt * 12;
-
+var monthsNeeded = "";
+if(goal != ""){
+    monthsNeeded = Math.ceil(goal / monthly);
+}    
+bdt = Number(bdt).toLocaleString();
+yearly = Number(yearly).toLocaleString();
+monthly = Number(monthly).toLocaleString();
 document.getElementById("output").innerHTML =
-"SAR "+sar+" = "+bdt+" BDT <br><br> 1 Year Savings = "+yearly+" BDT";
-
-}
+"SAR "+sar+" = "+bdt+" BDT <br><br>" +
+"Monthly Savings = "+monthly+" BDT <br><br>" +
+"1 Year Savings = "+yearly+" BDT <br><br>" +
+(goal != "" ? "You need "+monthsNeeded+" months to reach your goal." : "");
 </script>
 
 </body>
