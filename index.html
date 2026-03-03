@@ -1,31 +1,113 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SAR to BDT Calculator</title>
-    <style>
-        body { font-family: Arial; text-align:center; margin-top:50px; }
-        input { padding:10px; width:200px; }
-        button { padding:10px 20px; margin-top:10px; }
-        h1 { color:green; }
-    </style>
+<title>Saudi Salary Planner | SAR to BDT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background:#f2f2f2;
+}
+
+header{
+    background:#0a7c2f;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    width:90%;
+    max-width:500px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    background:#0a7c2f;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#055a20;
+}
+
+.result{
+    margin-top:20px;
+    font-weight:bold;
+    text-align:center;
+}
+footer{
+    text-align:center;
+    padding:15px;
+    font-size:14px;
+    color:#777;
+}
+</style>
 </head>
+
 <body>
 
-<h1>SAR to BDT Calculator</h1>
+<header>
+<h2>Saudi Salary Planner</h2>
+<p>SAR to BDT + Savings Goal Tool</p>
+</header>
 
-<input type="number" id="sar" placeholder="Enter SAR Amount">
-<br><br>
-<button onclick="convert()">Convert</button>
+<div class="container">
 
-<h2 id="result"></h2>
+<label>Enter SAR Amount:</label>
+<input type="number" id="sar">
+
+<label>Exchange Rate (1 SAR = ? BDT)</label>
+<input type="number" id="rate" value="30">
+
+<button onclick="calculate()">Calculate</button>
+
+<div class="result" id="output"></div>
+
+</div>
+
+<footer>
+© 2026 Saudi Salary Planner | Made for Probashi Workers
+</footer>
 
 <script>
-function convert() {
-    var sar = document.getElementById("sar").value;
-    var rate = 30;
-    var bdt = sar * rate;
-    document.getElementById("result").innerHTML =
-        sar + " SAR = " + bdt + " BDT";
+function calculate(){
+
+var sar = document.getElementById("sar").value;
+var rate = document.getElementById("rate").value;
+
+if(sar=="" || rate==""){
+    document.getElementById("output").innerHTML="Please enter all values";
+    return;
+}
+
+var bdt = sar * rate;
+var yearly = bdt * 12;
+
+document.getElementById("output").innerHTML =
+"SAR "+sar+" = "+bdt+" BDT <br><br> 1 Year Savings = "+yearly+" BDT";
+
 }
 </script>
 
