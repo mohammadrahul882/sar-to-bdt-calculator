@@ -5,6 +5,7 @@
 <title>Rahul Finance Pro</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0f9d58">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
 <style>
 body{
 font-family:Arial;
@@ -139,9 +140,9 @@ opacity:0.6;
 <button onclick="calculate()">Calculate</button>
 <button onclick="resetAll()">Reset</button>
 <button onclick="shareResult()">Share</button>
-
+<button id="installBtn" style="display:none;">Install App</button>  
 <div class="result" id="output"></div>
-
+<canvas id="financeChart"></canvas>
 <div class="progress-bar">
 <div class="progress" id="progress"></div>
 </div>
@@ -155,7 +156,7 @@ opacity:0.6;
 </footer>
 
 <script>
-
+let financeChart;
 function setRate(){
 rate.value = currency.value;
 }
@@ -201,8 +202,31 @@ output.innerHTML=
 progress.style.width=progressPercent+"%";
 
 saveHistory(final,netSavings);
+let ctx = document.getElementById('financeChart').getContext('2d');
+
+if (financeChart) {
+    financeChart.destroy();
 }
 
+financeChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Receive', 'Expense', 'Net Savings'],
+        datasets: [{
+            data: [final, expenseVal, netSavings],
+            backgroundColor: ['#00c853', '#d50000', '#2962ff']
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+}
 function saveHistory(final,net){
 let historyData=JSON.parse(localStorage.getItem("history")||"[]");
 historyData.unshift("Receive: "+final.toLocaleString()+" | Net: "+net.toLocaleString());
@@ -248,6 +272,42 @@ showHistory();
 
 </script>
 <script>
+async function getLiveRate() {
+  try {
+    let response = await fetch("https://open.er-api.com/v6/latest/SAR");
+    let data = await response.json();
+    let bdtRate = data.rates.BDT;
+    document.getElementById("rate").value = bdtRate.toFixed(2);
+  } catch (error) {
+    console.log("Rate fetch failed");
+  }
+}
+
+window.onload = function(){
+  getLiveRate();
+};
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = "block";
+});
+
+installBtn.addEventListener("click", async () => {
+  installBtn.style.display = "none";
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === "accepted") {
+    console.log("User installed the app");
+  }
+  deferredPrompt = null;
+});
+
+window.addEventListener("appinstalled", () => {
+  console.log("App successfully installed");
+});
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
