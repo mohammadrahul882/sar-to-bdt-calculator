@@ -1,0 +1,8 @@
+{
+  "name": "Rahul Finance Pro",
+  "short_name": "Finance App",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f9d58",
+  "theme_color": "#0f9d58"
+}
