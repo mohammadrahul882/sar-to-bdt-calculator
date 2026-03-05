@@ -1,0 +1,35 @@
+sar-to-bdt-calculator
+│
+├── index.html
+├── style.css
+├── script.js
+├── manifest.json
+├── service-worker.js
+│
+├── pages
+│   ├── tools.html
+│   ├── about.html
+│   └── contact.html
+│
+├── images
+│   ├── logo.png
+│   ├── banner.jpg
+│   └── icons
+│       ├── icon-192.png
+│       └── icon-512.png
+│
+├── data
+│   ├── rates.json
+│   └── history.json
+│
+├── js
+│   ├── chart.js
+│   ├── calculator.js
+│   └── currency-api.js
+│
+├── css
+│   └── responsive.css
+│
+└── components
+    ├── navbar.html
+    └── footer.html
