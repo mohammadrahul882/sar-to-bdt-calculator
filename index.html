@@ -32,13 +32,13 @@
 <p>Ultimate Salary & Savings Planner</p>
 <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
 </header>
-
+<p>Live Exchange Rate: <span id="rate">--</span></p>
 <div class="container">
 
 <label>Select Currency</label>
 <select id="currency" onchange="setRate()">
 <option value="30">SAR</option>
-<option value="29">AED</option>
+<option value="29">AED</option>    
 <option value="27">QAR</option>
 <option value="85">KWD</option>
 </select>
@@ -47,7 +47,8 @@
 <input type="number" id="salary" min="0">
 
 <label>Exchange Rate</label>
-<input type="number" id="rate" value="30">
+    
+<input type="number" id="exchangeRate" value="30">
 
 <label>Monthly Expense (BDT)</label>
 <input type="number" id="expense" min="0">
