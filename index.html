@@ -75,7 +75,7 @@
 
 <button onclick="calculate()">Calculate</button>
 <button onclick="resetAll()">Reset</button>
-<button onclick="shareResult()">Share</button>
+<button onclick="shareApp()">Share</button>
 <button id="installBtn" style="display:none;">Install App</button>  
 <div class="result" id="output"></div>
 <canvas id="financeChart"></canvas>
@@ -90,6 +90,7 @@
 <footer>
 © 2026 Rahul Finance Tool 🚀
 </footer>
+<script src="share.js"></script>    
 <script>const ctx = document.getElementById('currencyChart');
 
 new Chart(ctx, {
