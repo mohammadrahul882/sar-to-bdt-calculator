@@ -166,3 +166,93 @@ transition:0.2s;
 .menu-icon:hover{
 background:rgba(0,0,0,0.5);
 }
+.contact-section{
+max-width:520px;
+margin:50px auto;
+padding:25px;
+background:linear-gradient(135deg,#ffffff,#f8fafc);
+border-radius:14px;
+box-shadow:0 15px 35px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+.contact-section:hover{
+transform:translateY(-4px);
+box-shadow:0 20px 45px rgba(0,0,0,0.2);
+}
+
+.contact-section h2{
+text-align:center;
+margin-bottom:25px;
+font-size:24px;
+color:#0f172a;
+}
+
+.contact-section form{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.contact-section label{
+font-weight:600;
+font-size:14px;
+color:#334155;
+}
+
+.contact-section input,
+.contact-section textarea,
+.contact-section select{
+padding:12px;
+border-radius:8px;
+border:1px solid #cbd5f5;
+font-size:14px;
+outline:none;
+transition:0.25s;
+background:#f8fafc;
+}
+
+.contact-section input:focus,
+.contact-section textarea:focus,
+.contact-section select:focus{
+border-color:#16a34a;
+box-shadow:0 0 0 2px rgba(22,163,74,0.15);
+background:#ffffff;
+}
+
+.contact-section textarea{
+resize:none;
+}
+
+.contact-section button{
+background:linear-gradient(135deg,#16a34a,#22c55e);
+color:white;
+padding:14px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+font-weight:600;
+transition:0.25s;
+}
+
+.contact-section button:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 25px rgba(22,163,74,0.4);
+background:linear-gradient(135deg,#15803d,#16a34a);
+}
+
+/* Mobile Responsive */
+
+@media(max-width:600px){
+
+.contact-section{
+margin:30px 15px;
+padding:20px;
+}
+
+.contact-section h2{
+font-size:20px;
+}
+
+  }
