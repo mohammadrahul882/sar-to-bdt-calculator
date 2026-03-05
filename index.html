@@ -76,79 +76,25 @@
 <footer>
 © 2026 Rahul Finance Tool 🚀
 </footer>
-
 <script>
-let financeChart;
-function setRate(){
-rate.value = currency.value;
-}
+let deferredPrompt;
 
-function calculate(){
-
-let salary = Number(salaryInput().value);
-let rateVal = Number(rate.value);
-let expenseVal = Number(expense.value);
-let goalVal = Number(goal.value);
-let feeVal = Number(fee.value);
-
-if(salary<=0 || rateVal<=0){
-output.innerHTML="Enter valid salary and rate.";
-return;
-}
-
-if(feeVal<0 || feeVal>100){
-output.innerHTML="Fee must be between 0-100%.";
-return;
-}
-
-let original = salary*rateVal;
-let feeAmount = original*feeVal/100;
-let final = original-feeAmount;
-let netSavings = final-expenseVal;
-
-if(netSavings<0){
-output.innerHTML="⚠ Expense is higher than income!";
-progress.style.width="0%";
-return;
-}
-
-let progressPercent = goalVal>0 ? Math.min((netSavings/goalVal)*100,100):0;
-let months = goalVal>0 ? Math.ceil(goalVal/netSavings):0;
-
-output.innerHTML=
-"<b>Receive:</b> "+final.toLocaleString()+" BDT<br><br>"+
-"<b>Expense:</b> "+expenseVal.toLocaleString()+"<br><br>"+
-"<b>Net Savings:</b> "+netSavings.toLocaleString()+"<br><br>"+
-(goalVal>0 ? "<b>Goal Progress:</b> "+progressPercent.toFixed(1)+"%<br><b>Months:</b> "+months:"");
-
-progress.style.width=progressPercent+"%";
-
-saveHistory(final,netSavings);
-let ctx = document.getElementById('financeChart').getContext('2d');
-
-if (financeChart) {
-    financeChart.destroy();
-}
-
-financeChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-        labels: ['Receive', 'Expense', 'Net Savings'],
-        datasets: [{
-            data: [final, expenseVal, netSavings],
-            backgroundColor: ['#00c853', '#d50000', '#2962ff']
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'bottom'
-            }
-        }
-    }
+window.addEventListener("beforeinstallprompt",(e)=>{
+e.preventDefault();
+deferredPrompt=e;
+document.getElementById("installBtn").style.display="block";
 });
-}
+
+document.getElementById("installBtn").addEventListener("click",()=>{
+deferredPrompt.prompt();
+});
+</script>
+<script src="js/script.js"></script>
+<script src="js/api.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/chart.js"></script>
+
+
 function saveHistory(final,net){
 let historyData=JSON.parse(localStorage.getItem("history")||"[]");
 historyData.unshift("Receive: "+final.toLocaleString()+" | Net: "+net.toLocaleString());
