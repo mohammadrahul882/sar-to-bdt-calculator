@@ -62,7 +62,8 @@
 
 <button onclick="convertCurrency()">Convert</button>
 
-<h2 id="result"></h2>    
+<h2 id="result"></h2>
+<canvas id="currencyChart"></canvas>    
 <label>Monthly Expense (BDT)</label>
 <input type="number" id="expense" min="0">
 
@@ -89,7 +90,37 @@
 <footer>
 © 2026 Rahul Finance Tool 🚀
 </footer>
-<script>
+<script>const ctx = document.getElementById('currencyChart');
+
+new Chart(ctx, {
+type: 'line',
+data: {
+labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+datasets: [{
+label: 'SAR → BDT Rate',
+data: [30,31,29,32,30,33,31],
+borderColor:'#16a34a',
+backgroundColor:'rgba(22,163,74,0.2)',
+borderWidth:3,
+tension:0.4,
+fill:true,
+pointRadius:4
+}]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{
+display:true
+}
+},
+scales:{
+y:{
+beginAtZero:false
+}
+}
+}
+});
 let deferredPrompt;
 
 window.addEventListener("beforeinstallprompt",(e)=>{
