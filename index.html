@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+
+.menu{
+display:none;
+position:absolute;
+top:60px;
+left:10px;
+background:white;
+padding:10px;
+border-radius:8px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.show-menu{
+display:block;
+}
+
+.menu-icon{
+font-size:28px;
+cursor:pointer;
+margin:10px;
+}
+
+</style>
+
+</head>    
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rahul Finance Pro</title>
 <link rel="stylesheet" href="style.css">
@@ -43,7 +69,16 @@
 <option value="27">QAR</option>
 <option value="85">KWD</option>
 </select>
-
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
+<div id="menu" class="menu">
+  <a href="#">⚙️ Settings</a>
+  <a href="#">🌙 Dark Mode</a>
+  <a href="#">📤 Share App</a>
+  <a href="#">📊 Finance Chart</a>
+  <a href="#">📜 History</a>
+  <a href="#">📱 Install App</a>
+  <a href="#">ℹ️ About</a>
+</div>
 <label>Salary Amount</label>
 <input type="number" id="salary" min="0">
 
@@ -91,7 +126,39 @@
 © 2026 Rahul Finance Tool 🚀
 </footer>
 <script src="share.js"></script>    
-<script>const ctx = document.getElementById('currencyChart');
+<script src="share.js"></script>
+
+<script>
+
+// MENU SYSTEM (Advanced)
+
+const menu = document.getElementById("menu");
+
+function toggleMenu(){
+  menu.classList.toggle("show-menu");
+}
+
+// Outside click close
+document.addEventListener("click", function(event){
+  const menuIcon = document.querySelector(".menu-icon");
+
+  if(!menu.contains(event.target) && !menuIcon.contains(event.target)){
+    menu.classList.remove("show-menu");
+  }
+});
+
+// ESC key close
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){
+    menu.classList.remove("show-menu");
+  }
+});
+
+
+// Chart system
+const ctx = document.getElementById('currencyChart');
+
+</script>
 
 new Chart(ctx, {
 type: 'line',
