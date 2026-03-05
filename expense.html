@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Expense Tracker - Rahul Finance</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<h2>💰 Expense Tracker</h2>
+
+<input type="number" id="amount" placeholder="Enter expense amount">
+
+<button onclick="addExpense()">Add Expense</button>
+
+<h3>Total: <span id="total">0</span> BDT</h3>
+
+<ul id="list"></ul>
+
+<canvas id="expenseChart"></canvas>
+
+<script>
+
+let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+function render(){
+
+let list = document.getElementById("list");
+
+list.innerHTML = "";
+
+let total = 0;
+
+expenses.forEach((value,index)=>{
+
+let li = document.createElement("li");
+
+li.innerHTML = value + " BDT <button onclick='removeExpense("+index+")'>❌</button>";
+
+list.appendChild(li);
+
+total += value;
+
+});
+
+document.getElementById("total").innerText = total;
+
+localStorage.setItem("expenses", JSON.stringify(expenses));
+
+drawChart();
+
+}
+
+function addExpense(){
+
+let amount = document.getElementById("amount").value;
+
+if(amount=="") return;
+
+expenses.push(Number(amount));
+
+document.getElementById("amount").value="";
+
+render();
+
+}
+
+function removeExpense(index){
+
+expenses.splice(index,1);
+
+render();
+
+}
+
+function drawChart(){
+
+const ctx = document.getElementById('expenseChart');
+
+new Chart(ctx,{
+
+type:'bar',
+
+data:{
+
+labels: expenses.map((e,i)=>"Item "+(i+1)),
+
+datasets:[{
+
+label:'Expense',
+
+data: expenses,
+
+backgroundColor:'#16a34a'
+
+}]
+
+}
+
+});
+
+}
+
+render();
+
+</script>
+
+</body>
+</html>
