@@ -1,26 +1,161 @@
-<!DOCTYPE html><html>
-<head><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finance Tools</title>
-<link rel="stylesheet" href="../style.css"></head><body><header class="topbar"><div class="logo">
-<img src="../images/logo.png">
-<span>Rahul Finance</span>
-</div><nav>
-<a href="../index.html">Home</a>
-<a href="tools.html">Tools</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-</nav></header>
-<h2>Finance Tools</h2>
-<div class="tool-card">
-<a href="../expense.html">💰 Expense Tracker</a>
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Rahul Finance Pro Calculator</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f1f5f9;
+margin:0;
+}
+
+.navbar{
+background:#16a34a;
+color:white;
+padding:15px;
+text-align:center;
+font-size:20px;
+}
+
+.container{
+max-width:500px;
+margin:40px auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:10px;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#16a34a;
+border:none;
+color:white;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#15803d;
+}
+
+.result{
+margin-top:20px;
+font-size:18px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+Rahul Finance Pro Calculator
 </div>
 
-<div class="tool-card">
-<a href="../index.html">💱 Currency Calculator</a>
+<div class="container">
+
+<h2>Remittance & Salary Calculator</h2>
+
+<label>Currency</label>
+
+<select id="currency">
+<option value="SAR">SAR</option>
+<option value="AED">AED</option>
+<option value="USD">USD</option>
+</select>
+
+<label>Salary Amount</label>
+
+<input type="number" id="salary" placeholder="Enter salary">
+
+<label>Remittance Fee (%)</label>
+
+<input type="number" id="fee" placeholder="Example: 2">
+
+<label>Monthly Saving (%)</label>
+
+<input type="number" id="saving" placeholder="Example: 20">
+
+<button onclick="calculate()">Calculate</button>
+
+<button onclick="reset()">Reset</button>
+
+<div class="result" id="result"></div>
+
 </div>
 
-<div class="tool-card">
-<a href="contact.html">📩 Contact</a>
-</div>
-</div></body>
+<script>
+
+async function getRate(currency){
+
+let res = await fetch("https://open.er-api.com/v6/latest/"+currency)
+let data = await res.json()
+
+return data.rates.BDT
+
+}
+
+async function calculate(){
+
+let currency=document.getElementById("currency").value
+let salary=document.getElementById("salary").value
+let fee=document.getElementById("fee").value
+let saving=document.getElementById("saving").value
+
+let rate=await getRate(currency)
+
+let gross=salary*rate
+
+let feeAmount=gross*(fee/100)
+
+let net=gross-feeAmount
+
+let savingAmount=net*(saving/100)
+
+document.getElementById("result").innerHTML=
+
+"Exchange Rate: "+rate.toFixed(2)+"<br>"+
+"Gross BDT: "+gross.toFixed(2)+"<br>"+
+"Remittance Fee: "+feeAmount.toFixed(2)+"<br>"+
+"Net Receive: "+net.toFixed(2)+"<br>"+
+"Monthly Saving: "+savingAmount.toFixed(2)
+
+}
+
+function reset(){
+
+document.getElementById("salary").value=""
+document.getElementById("fee").value=""
+document.getElementById("saving").value=""
+document.getElementById("result").innerHTML=""
+
+}
+
+</script>
+
+</body>
 </html>
