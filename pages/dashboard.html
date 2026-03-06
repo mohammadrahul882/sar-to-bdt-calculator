@@ -1,13 +1,123 @@
-<h1>Finance Dashboard</h1>
+<!DOCTYPE html>
+<html>
 
-<ul>
+<head>
 
-<li><a href="tools.html">Salary Calculator</a></li>
+<meta charset="UTF-8">
 
-<li><a href="settings.html">Settings</a></li>
+<title>Rahul Finance Dashboard</title>
 
-<li><a href="about.html">About</a></li>
+<style>
 
-<li><a href="contact.html">Contact</a></li>
+body{
+font-family:Arial;
+margin:0;
+background:#f1f5f9;
+}
 
-</ul>
+.header{
+background:#16a34a;
+color:white;
+padding:18px;
+text-align:center;
+font-size:22px;
+}
+
+.container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+padding:25px;
+max-width:700px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,0.15);
+text-align:center;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card a{
+text-decoration:none;
+color:#111;
+font-size:18px;
+font-weight:bold;
+}
+
+.icon{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.footer{
+text-align:center;
+padding:20px;
+color:#666;
+font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+Rahul Finance Dashboard
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<div class="icon">💰</div>
+
+<a href="tools.html">Salary Calculator</a>
+
+</div>
+
+<div class="card">
+
+<div class="icon">⚙</div>
+
+<a href="settings.html">Settings</a>
+
+</div>
+
+<div class="card">
+
+<div class="icon">ℹ</div>
+
+<a href="about.html">About</a>
+
+</div>
+
+<div class="card">
+
+<div class="icon">✉</div>
+
+<a href="contact.html">Contact</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Rahul Finance
+
+</div>
+
+</body>
+
+</html>
