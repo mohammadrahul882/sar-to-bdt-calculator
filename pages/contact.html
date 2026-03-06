@@ -1,30 +1,137 @@
-<!DOCTYPE html><html>
-<head><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
 <title>Contact Rahul Finance</title>
-<link rel="stylesheet" href="../style.css"></head><body><header class="topbar"><div class="logo">
-<img src="../images/logo.png">
-<span>Rahul Finance</span>
-</div><nav>
-<a href="../index.html">Home</a>
-<a href="tools.html">Tools</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-</nav></header><header>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f1f5f9;
+}
+
+.navbar{
+background:#16a34a;
+color:white;
+padding:15px;
+text-align:center;
+font-size:22px;
+}
+
+.container{
+max-width:600px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+h2{
+text-align:center;
+}
+
+label{
+display:block;
+margin-top:12px;
+font-weight:bold;
+}
+
+input,textarea,select{
+width:100%;
+padding:10px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+button{
+padding:12px;
+margin-top:15px;
+width:100%;
+border:none;
+background:#16a34a;
+color:white;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#15803d;
+}
+
+.footer{
+text-align:center;
+margin-top:25px;
+color:#666;
+font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+Rahul Finance Contact
+
+</div>
+
+<div class="container">
+
 <h2>Contact Us</h2>
-<form action="https://formspree.io/f/mreyzpyg" method="POST">
 
-<label>Name</label>
-<input type="text" name="name">
+<form action="https://formspree.io/f/mlgprbyr" method="POST">
 
-<label>Email</label>
-<input type="email" name="email">
+<label>Your Name</label>
+<input type="text" name="name" placeholder="Enter your name" required>
 
-<label>Message</label>
-<textarea rows="4" name="message"></textarea>
+<label>Email Address</label>
+<input type="email" name="email" placeholder="Enter your email" required>
+
+<label>Phone Number</label>
+<input type="text" name="phone" placeholder="Optional">
+
+<label>Feedback Type</label>
+
+<select name="type">
+
+<option>General Feedback</option>
+
+<option>Bug Report</option>
+
+<option>Feature Request</option>
+
+</select>
+
+<label>Your Message</label>
+
+<textarea name="message" rows="5" placeholder="Write your message..." required></textarea>
 
 <button type="submit">Send Message</button>
 
 </form>
-</div></body>
-  
+
+<a href="dashboard.html">
+<button>Back to Dashboard</button>
+</a>
+
+<div class="footer">
+
+© 2026 Rahul Finance Platform
+
+</div>
+
+</div>
+
+</body>
+
 </html>
